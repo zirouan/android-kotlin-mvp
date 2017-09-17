@@ -1,0 +1,5 @@
+<resources>
+    <string name="clear"/>
+    <string name="app_name">LiveoMVP</string>
+    <string name="action_settings">Settings</string>
+</resources>
