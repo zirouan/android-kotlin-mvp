@@ -11,14 +11,17 @@ import javax.inject.Inject
  * Created by rudsonlima on 8/29/17.
  */
 class HomePresenter @Inject
-constructor(private val mHomeInteractor: HomeInteractor, scheduler: BaseScheduler) : BasePresenter<HomeContract.View>(scheduler), HomeContract.Presenter {
+constructor(scheduler: BaseScheduler) : BasePresenter<HomeContract.View>(scheduler), HomeContract.Presenter {
+
+    @Inject
+    lateinit var mInteractor: HomeInteractor
 
     private var mView: HomeContract.View? = null
 
     override fun fetchUsers() {
         mView!!.onLoading(true)
 
-        mHomeInteractor.fetchUsers(mView!!.page)
+        mInteractor.fetchUsers(mView!!.page)
                 .subscribeOn(this.schedulerProvider.io())
                 .observeOn(this.schedulerProvider.ui())
                 .subscribe(
@@ -26,7 +29,7 @@ constructor(private val mHomeInteractor: HomeInteractor, scheduler: BaseSchedule
                             sucess(user)
                         },
                         { error ->
-                            (mView as HomeContract.View).onError(error.message!!)
+                            error(error.message!!)
                         }
                 )
     }
