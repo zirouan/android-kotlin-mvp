@@ -20,6 +20,9 @@ import javax.inject.Singleton
  */
 @Module
 class NetworkModule {
+    companion object {
+        private val CONNECT_TIMEOUT_IN_MS = 30000
+    }
 
     @Provides
     @Singleton
@@ -53,8 +56,4 @@ class NetworkModule {
     @Provides
     internal fun apiEndPoint(retrofit: Retrofit): ApiEndPoint =
             retrofit.create(ApiEndPoint::class.java)
-
-    companion object {
-        private val CONNECT_TIMEOUT_IN_MS = 30000
-    }
 }

@@ -7,18 +7,17 @@ import com.google.gson.annotations.SerializedName
  * Created by rudsonlima on 8/29/17.
  */
 
-class UserResponse {
+class UserResponse(
 
-    var page: Int = 0
+        var page: Int,
+        var total: Int,
 
-    var total: Int = 0
+        @SerializedName("per_page")
+        var perPage: Int,
 
-    @SerializedName("per_page")
-    var perPage: Int = 0
+        @SerializedName("total_pages")
+        var totalPages: Int,
 
-    @SerializedName("total_pages")
-    var totalPages: Int = 0
-
-    @SerializedName("data")
-    var list: List<User>? = null
+        @SerializedName("data")
+        var list: List<User>) {
 }

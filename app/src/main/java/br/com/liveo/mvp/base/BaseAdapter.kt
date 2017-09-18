@@ -15,9 +15,8 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     private val onItemClick = PublishSubject.create<T>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return onCreateViewHolderBase(parent, viewType)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+            onCreateViewHolderBase(parent, viewType)
 
     abstract fun onCreateViewHolderBase(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
@@ -29,13 +28,10 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     abstract fun onBindViewHolderBase(holder: RecyclerView.ViewHolder, position: Int)
 
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-    }
+    override fun getItemViewType(position: Int): Int = super.getItemViewType(position)
 
-    override fun getItemCount(): Int {
-        return if (dataList != null && dataList!!.size > 0) dataList!!.size else 0
-    }
+    override fun getItemCount(): Int =
+            if (dataList != null && dataList!!.size > 0) dataList!!.size else 0
 
     fun getItem(index: Int): T {
         return if (dataList != null && dataList!![index] != null) {
@@ -45,7 +41,5 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         }
     }
 
-    fun observableItemClick(): Observable<T> {
-        return onItemClick
-    }
+    fun observableItemClick(): Observable<T> = onItemClick
 }
