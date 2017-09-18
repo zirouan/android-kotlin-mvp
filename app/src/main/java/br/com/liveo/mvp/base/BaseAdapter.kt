@@ -15,18 +15,19 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     private val onItemClick = PublishSubject.create<T>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            onCreateViewHolderBase(parent, viewType)
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder =
+            onCreateViewHolderBase(parent!!, viewType)
 
-    abstract fun onCreateViewHolderBase(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        this.onBindViewHolderBase(holder, position)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        this.onBindViewHolderBase(holder!!, position)
 
         holder.itemView.setOnClickListener { onItemClick.onNext(dataList!![holder.adapterPosition]) }
     }
 
+    abstract fun onCreateViewHolderBase(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+
     abstract fun onBindViewHolderBase(holder: RecyclerView.ViewHolder, position: Int)
+
 
     override fun getItemViewType(position: Int): Int = super.getItemViewType(position)
 
