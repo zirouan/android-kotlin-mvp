@@ -16,10 +16,10 @@ constructor(scheduler: BaseScheduler) : BasePresenter<HomeContract.View>(schedul
     @Inject
     lateinit var mInteractor: HomeInteractor
 
-    private var mView: HomeContract.View? = null
+    var mView: HomeContract.View? = null
 
     override fun fetchUsers() {
-        mView!!.onLoading(true)
+        mView?.onLoading(true)
 
         mInteractor.fetchUsers(mView!!.page)
                 .subscribeOn(this.schedulerProvider.io())
@@ -52,5 +52,5 @@ constructor(scheduler: BaseScheduler) : BasePresenter<HomeContract.View>(schedul
         this.mView = null
     }
 
-    override fun getView(): BaseView<*> = this.mView!!
+    override fun getView(): HomeContract.View? = this.mView
 }

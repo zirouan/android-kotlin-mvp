@@ -55,6 +55,7 @@ dependencies {
 
     //Test
     testCompile "junit:junit:${junit_version}"
+    testCompile "org.mockito:mockito-core:${mockito_version}"
 
     //Google
     compile "com.android.support:design:${google_support_version}"

@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     }
 
-    override fun onError(error: String) {
+    override fun onError(error: String?) {
 
     }
 

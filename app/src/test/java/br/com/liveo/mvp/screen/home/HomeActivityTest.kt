@@ -11,7 +11,7 @@ import org.junit.Test
 
 class HomeActivityTest {
 
-    private var entryClass: Class<*>? = null
+    var entryClass: Class<*>? = null
 
     @Before
     fun setUp() {

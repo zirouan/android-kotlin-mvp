@@ -11,8 +11,8 @@ import org.junit.Test
 
 class HomeContractTest {
 
-    private var entryClassView: Class<*>? = null
-    private var entryClassPresenter: Class<*>? = null
+    var entryClassView: Class<*>? = null
+    var entryClassPresenter: Class<*>? = null
 
     @Before
     fun setUp() {

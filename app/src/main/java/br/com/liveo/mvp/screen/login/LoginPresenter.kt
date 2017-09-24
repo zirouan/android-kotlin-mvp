@@ -22,7 +22,7 @@ constructor(scheduler: BaseScheduler) : BasePresenter<LoginContract.View>(schedu
         this.mView = null
     }
 
-    override fun getView(): BaseView<*> = this.mView!!
+    override fun getView(): LoginContract.View? = this.mView
 
     override fun toDoLogin() {
 
