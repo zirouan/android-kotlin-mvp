@@ -3,7 +3,7 @@ package br.com.liveo.mvp.screen.home
 import br.com.liveo.mvp.base.BaseView
 import br.com.liveo.mvp.main.MainPresenter
 import br.com.liveo.mvp.model.domain.UserResponse
-import io.reactivex.Observable
+import io.reactivex.Single
 
 /**
  * Created by rudsonlima on 8/29/17.
@@ -22,6 +22,6 @@ interface HomeContract {
     }
 
     interface Interactor {
-        fun fetchUsers(page: Int): Observable<UserResponse>
+        fun fetchUsers(page: Int): Single<UserResponse>
     }
 }

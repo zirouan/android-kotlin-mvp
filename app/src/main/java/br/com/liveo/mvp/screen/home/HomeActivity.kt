@@ -62,7 +62,7 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         mBinding!!.swipeContainer.isRefreshing = isLoading
     }
 
-    override fun onError(error: String?) {}
+    override fun onError(error: Throwable?) {}
 
     override val page: Int
         get() = 2

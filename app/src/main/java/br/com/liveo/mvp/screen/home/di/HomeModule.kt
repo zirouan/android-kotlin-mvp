@@ -1,5 +1,6 @@
 package br.com.liveo.mvp.screen.home.di
 
+import android.support.annotation.NonNull
 import br.com.liveo.mvp.data.source.remote.ApiEndPoint
 import br.com.liveo.mvp.di.scope.ActivityScoped
 import br.com.liveo.mvp.screen.home.HomeContract
@@ -18,13 +19,14 @@ class HomeModule {
 
     @Provides
     @ActivityScoped
-    internal fun provideHomeInteractor(apiEndPoint: ApiEndPoint): HomeInteractor =
+    internal fun provideHomeInteractor(apiEndPoint: ApiEndPoint): HomeContract.Interactor =
             HomeInteractor(apiEndPoint)
 
     @Provides
     @ActivityScoped
-    internal fun provideHomePresenter(scheduler: BaseScheduler): HomeContract.Presenter =
-            HomePresenter(scheduler)
+    internal fun provideHomePresenter(@NonNull interactor: HomeContract.Interactor,
+                                      @NonNull scheduler: BaseScheduler): HomeContract.Presenter =
+            HomePresenter(interactor, scheduler)
 
     @Provides
     internal fun provideScheduleProvider(): BaseScheduler = SchedulerProvider.instance

@@ -8,5 +8,5 @@ import br.com.liveo.mvp.main.MainView
 
 interface BaseView<T> : MainView {
     fun onLoading(isLoading: Boolean)
-    fun onError(error: String?)
+    fun onError(error: Throwable?)
 }
