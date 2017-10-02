@@ -11,5 +11,5 @@ import javax.inject.Inject
  */
 class HomeInteractor @Inject
 constructor(private val apiEndPoint: ApiEndPoint) : HomeContract.Interactor {
-    override fun fetchUsers(page: Int): Single<UserResponse> = apiEndPoint.fetchUsers(page)
+    override fun fetchUsers(page: Int): Observable<UserResponse> = apiEndPoint.fetchUsers(page)
 }

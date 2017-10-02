@@ -13,5 +13,5 @@ import retrofit2.http.Query
 interface ApiEndPoint {
 
     @GET("api/users")
-    fun fetchUsers(@Query("page") page: Int): Single<UserResponse>
+    fun fetchUsers(@Query("page") page: Int): Observable<UserResponse>
 }

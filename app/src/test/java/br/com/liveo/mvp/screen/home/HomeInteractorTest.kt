@@ -3,7 +3,6 @@ package br.com.liveo.mvp.screen.home
 import br.com.liveo.mvp.data.source.remote.ApiEndPoint
 import br.com.liveo.mvp.model.domain.UserResponse
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
@@ -37,7 +36,7 @@ class HomeInteractorTest {
         MockitoAnnotations.initMocks(this)
 
         mInteractor = HomeInteractor(mApiEndPoint!!)
-        _when(mInteractor.fetchUsers(PAGE!!)).thenReturn(Single.just(mUserResponse))
+        _when(mInteractor.fetchUsers(PAGE!!)).thenReturn(Observable.just(mUserResponse))
     }
 
     @Test

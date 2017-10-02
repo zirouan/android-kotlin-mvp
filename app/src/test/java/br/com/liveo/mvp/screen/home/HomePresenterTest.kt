@@ -2,7 +2,7 @@ package br.com.liveo.mvp.screen.home
 
 import br.com.liveo.mvp.model.domain.UserResponse
 import br.com.liveo.mvp.util.scheduler.TestSchedulerProvider
-import io.reactivex.Single
+import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.After
 import org.junit.Assert
@@ -41,7 +41,7 @@ class HomePresenterTest {
         MockitoAnnotations.initMocks(this)
 
         _when(mView!!.page).thenReturn(2)
-        _when(mInteractor!!.fetchUsers(2)).thenReturn(Single.just(mUserResponse!!))
+        _when(mInteractor!!.fetchUsers(2)).thenReturn(Observable.just(mUserResponse!!))
 
         mTestScheduler = TestScheduler()
         mPresenter = HomePresenter(mInteractor, TestSchedulerProvider(mTestScheduler))
@@ -84,7 +84,7 @@ class HomePresenterTest {
     @Test
     fun fetchUsers_returningFailing_forView() {
         val throwable = Throwable()
-        _when(mInteractor!!.fetchUsers(2)).thenReturn(Single.error(throwable))
+        _when(mInteractor!!.fetchUsers(2)).thenReturn(Observable.error(throwable))
 
         mPresenter.fetchUsers()
 
