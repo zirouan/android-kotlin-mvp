@@ -1,8 +1,7 @@
-package br.com.liveo.mvp.data.source.remote
+package br.com.liveo.mvp.data.remote
 
 import br.com.liveo.mvp.model.domain.UserResponse
 import io.reactivex.Observable
-import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 

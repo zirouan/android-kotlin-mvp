@@ -1,4 +1,4 @@
-package br.com.liveo.mvp.data.source.remote
+package br.com.liveo.mvp.data.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,7 +1,7 @@
 package br.com.liveo.mvp.screen.home.di
 
 import android.support.annotation.NonNull
-import br.com.liveo.mvp.data.source.remote.ApiEndPoint
+import br.com.liveo.mvp.data.remote.ApiEndPoint
 import br.com.liveo.mvp.di.scope.ActivityScoped
 import br.com.liveo.mvp.screen.home.HomeContract
 import br.com.liveo.mvp.screen.home.HomeInteractor
@@ -12,8 +12,12 @@ import dagger.Module
 import dagger.Provides
 
 /**
- * Created by rudsonlima on 9/2/17.
+ * This class makes Subcomponent for {@link HomeComponent}
+ *
+ * @author Rudson Lima
+ * @since 10/02/17
  */
+
 @Module
 class HomeModule {
 

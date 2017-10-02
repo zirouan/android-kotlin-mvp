@@ -1,7 +1,6 @@
 package br.com.liveo.mvp.screen.login
 
 import br.com.liveo.mvp.base.BasePresenter
-import br.com.liveo.mvp.base.BaseView
 import br.com.liveo.mvp.util.scheduler.BaseScheduler
 import javax.inject.Inject
 

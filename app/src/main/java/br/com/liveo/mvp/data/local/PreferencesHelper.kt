@@ -1,4 +1,4 @@
-package br.com.liveo.mvp.data.source.local
+package br.com.liveo.mvp.data.local
 
 import android.content.Context
 import android.preference.PreferenceManager

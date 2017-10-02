@@ -5,7 +5,10 @@ import br.com.liveo.mvp.screen.home.HomeActivity
 import dagger.Subcomponent
 
 /**
- * Created by rudsonlima on 9/4/17.
+ * This class makes Component for {@link ApplicationComponent}
+ *
+ * @author Rudson Lima
+ * @since 10/02/17
  */
 @ActivityScoped
 @Subcomponent(modules = arrayOf(HomeModule::class))

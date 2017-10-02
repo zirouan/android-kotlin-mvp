@@ -3,15 +3,17 @@ package br.com.liveo.mvp.screen.home
 import br.com.liveo.mvp.base.BasePresenter
 import br.com.liveo.mvp.model.domain.UserResponse
 import br.com.liveo.mvp.util.scheduler.BaseScheduler
-import io.reactivex.Observable
 import io.reactivex.Observer
-import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
- * Created by rudsonlima on 8/29/17.
+ * This class makes module for {@link HomeModule}
+ *
+ * @author Rudson Lima
+ * @since 10/02/17
  */
+
 class HomePresenter @Inject
 constructor(val mInteractor: HomeContract.Interactor, scheduler: BaseScheduler) : BasePresenter<HomeContract.View>(scheduler), HomeContract.Presenter {
 
