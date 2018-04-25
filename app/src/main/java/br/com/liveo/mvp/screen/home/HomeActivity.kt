@@ -36,7 +36,13 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         this.fetchUsers()
     }
 
-    private fun onInitView() {
+    override fun onInitInject() {
+        App.application.module(HomeModule()).inject(this)
+
+        this.onInitView()
+    }
+
+    override fun onInitView() {
         mBinding = this.bindView(R.layout.activity_home) as ActivityHomeBinding
 
         this.onInitToolbar(mBinding?.includeToolbar?.toolbar, R.string.app_name)
@@ -46,12 +52,6 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         mBinding?.swipeContainer?.setOnRefreshListener(onRefresh)
         mBinding?.swipeContainer?.setColorSchemeResources(R.color.accent, R.color.accent,
                 R.color.accent, R.color.accent)
-    }
-
-    private fun onInitInject() {
-        App.application.module(HomeModule()).inject(this)
-
-        this.onInitView()
     }
 
     private val onRefresh = SwipeRefreshLayout.OnRefreshListener { fetchUsers() }

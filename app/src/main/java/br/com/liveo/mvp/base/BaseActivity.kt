@@ -26,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun bindView(layout: Int): ViewDataBinding =
             DataBindingUtil.setContentView(this, layout)
 
-    //region Methods toolbar
+    //region Methods toolbar/appBar
     fun onInitToolbar(toolBar: Toolbar?) {
         onInitToolbar(toolBar, R.string.clear, -1, false)
     }
@@ -58,25 +58,6 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
     }
-    //endregion
-
-    abstract fun finishActivity()
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        this.finishActivity()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                return true
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
 
     fun showElevation(appBarLayout: AppBarLayout?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -94,5 +75,29 @@ abstract class BaseActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = ContextCompat.getColor(this, color)
         }
+    }
+
+    //endregion
+
+    //region Methods Abstract
+    abstract fun onInitView()
+    abstract fun onInitInject()
+    abstract fun finishActivity()
+    //endregion
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finishActivity()
     }
 }
