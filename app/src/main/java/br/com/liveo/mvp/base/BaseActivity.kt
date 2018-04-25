@@ -8,8 +8,11 @@ import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.MenuItem
 import android.view.WindowManager
 import br.com.liveo.mvp.R
+import br.com.liveo.mvp.extension.ActivityAnimation
+import br.com.liveo.mvp.extension.finishActivity
 
 /**
  * Created by rudsonlima on 8/29/17.
@@ -58,6 +61,32 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
     //endregion
+
+    open fun finishActivity() {
+        finish()
+        finishActivity(getFinishActivityTransition())
+    }
+
+    open fun getFinishActivityTransition(): ActivityAnimation? {
+        return ActivityAnimation.TRANSLATE_RIGHT
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishActivity(getFinishActivityTransition())
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
     fun showElevation(appBarLayout: AppBarLayout?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
