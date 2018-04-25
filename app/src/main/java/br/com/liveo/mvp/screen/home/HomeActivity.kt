@@ -83,6 +83,6 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     }
 
     override fun finishActivity() {
-        finishActivity(ActivityAnimation.TRANSLATE_DOWN)
+        finish()
     }
 }
