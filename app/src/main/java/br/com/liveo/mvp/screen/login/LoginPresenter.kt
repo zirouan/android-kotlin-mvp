@@ -10,19 +10,6 @@ import javax.inject.Inject
 class LoginPresenter @Inject
 constructor(scheduler: BaseScheduler) : BasePresenter<LoginContract.View>(scheduler), LoginContract.Presenter {
 
-    private var mView: LoginContract.View? = null
-
-
-    override fun attach(view: LoginContract.View) {
-        this.mView = view
-    }
-
-    override fun detachView() {
-        this.mView = null
-    }
-
-    override fun getView(): LoginContract.View? = this.mView
-
     override fun toDoLogin() {
 
     }

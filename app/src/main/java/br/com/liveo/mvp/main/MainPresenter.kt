@@ -5,7 +5,6 @@ package br.com.liveo.mvp.main
  */
 
 interface MainPresenter<T> {
-    fun attach(view: T)
+    fun attachView(view: T)
     fun detachView()
-    fun getView(): T?
 }

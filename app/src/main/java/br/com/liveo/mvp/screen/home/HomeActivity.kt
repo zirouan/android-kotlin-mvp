@@ -55,7 +55,7 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     private val onRefresh = SwipeRefreshLayout.OnRefreshListener { fetchUsers() }
 
     private fun fetchUsers() {
-        this.mHomePresenter.attach(this)
+        this.mHomePresenter.attachView(this)
         this.mHomePresenter.fetchUsers()
     }
 
