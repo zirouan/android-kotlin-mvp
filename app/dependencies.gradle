@@ -5,16 +5,17 @@ dependencies {
     testImplementation "junit:junit:${junit_version}"
     testImplementation "org.mockito:mockito-core:${mockito_version}"
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:${espresso_core_version}", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:${espresso_contrib_version}", {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
-    }
+    })
 
     //Google
     implementation "com.android.support:design:${google_support_version}"

@@ -31,21 +31,24 @@ class HomePresenterTest {
     var mView: HomeContract.View? = null
 
     @Mock
-    val mUserResponse: UserResponse? = null
+    lateinit var mUserResponse: UserResponse
 
     @Mock
-    val mInteractor: HomeContract.Interactor? = null
+    lateinit var mInteractor: HomeContract.Interactor
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        _when(mView!!.page).thenReturn(2)
-        _when(mInteractor!!.fetchUsers(2)).thenReturn(Observable.just(mUserResponse!!))
+        this.mView?.let {
 
-        mTestScheduler = TestScheduler()
-        mPresenter = HomePresenter(mInteractor, TestSchedulerProvider(mTestScheduler))
-        mPresenter.attach(this.mView!!)
+            _when(mView?.page).thenReturn(2)
+            _when(mInteractor.fetchUsers(2)).thenReturn(Observable.just(mUserResponse))
+
+            mTestScheduler = TestScheduler()
+            mPresenter = HomePresenter(mInteractor, TestSchedulerProvider(mTestScheduler))
+            mPresenter.attach(it)
+        }
     }
 
     @After
@@ -56,43 +59,49 @@ class HomePresenterTest {
     @Test
     fun fetchUsers_sucess() {
         mPresenter.fetchUsers()
-        verify(mInteractor!!, times(1)).fetchUsers(2)
+        verify(mInteractor, times(1)).fetchUsers(2)
     }
 
     @Test
     fun fetchUsers_returning_loadingSuccess_forView() {
-        mPresenter.fetchUsers()
+        this.mView?.let {
+            mPresenter.fetchUsers()
 
-        verify(this.mView!!, times(1)).page
-        verify(this.mView!!, times(1)).onLoading(true)
+            verify(it, times(1)).page
+            verify(it, times(1)).onLoading(true)
 
-        mTestScheduler.triggerActions()
+            mTestScheduler.triggerActions()
 
-        verify(this.mView!!, times(1)).onLoading(false)
+            verify(it, times(1)).onLoading(false)
+        }
     }
 
     @Test
     fun fetchUsers_returningSuccess_forView() {
-        mPresenter.fetchUsers()
+        this.mView?.let {
+            mPresenter.fetchUsers()
 
-        mTestScheduler.triggerActions()
+            mTestScheduler.triggerActions()
 
-        verify(this.mView!!, times(1)).onUserResponse(mUserResponse!!)
-        verify(this.mView!!, never()).onError(null)
+            verify(it, times(1)).onUserResponse(mUserResponse)
+            verify(it, never()).onError(null)
+        }
     }
 
     @Test
     fun fetchUsers_returningFailing_forView() {
-        val throwable = Throwable()
-        _when(mInteractor!!.fetchUsers(2)).thenReturn(Observable.error(throwable))
+        this.mView?.let {
+            val throwable = Throwable()
+            _when(mInteractor.fetchUsers(2)).thenReturn(Observable.error(throwable))
 
-        mPresenter.fetchUsers()
+            mPresenter.fetchUsers()
 
-        mTestScheduler.triggerActions()
+            mTestScheduler.triggerActions()
 
-        verify(mView!!).onError(throwable)
-        verify(this.mView!!, times(1)).onLoading(false)
-        verify(this.mView!!, never()).onUserResponse(mUserResponse!!)
+            verify(it).onError(throwable)
+            verify(it, times(1)).onLoading(false)
+            verify(it, never()).onUserResponse(mUserResponse)
+        }
     }
 
     @Test
