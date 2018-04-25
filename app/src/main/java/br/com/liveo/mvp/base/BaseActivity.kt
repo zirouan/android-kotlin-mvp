@@ -11,8 +11,6 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.WindowManager
 import br.com.liveo.mvp.R
-import br.com.liveo.mvp.extension.ActivityAnimation
-import br.com.liveo.mvp.extension.finishActivity
 
 /**
  * Created by rudsonlima on 8/29/17.
@@ -62,18 +60,11 @@ abstract class BaseActivity : AppCompatActivity() {
     }
     //endregion
 
-    open fun finishActivity() {
-        finish()
-        finishActivity(getFinishActivityTransition())
-    }
-
-    open fun getFinishActivityTransition(): ActivityAnimation? {
-        return ActivityAnimation.TRANSLATE_RIGHT
-    }
+    abstract fun finishActivity()
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finishActivity(getFinishActivityTransition())
+        this.finishActivity()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
