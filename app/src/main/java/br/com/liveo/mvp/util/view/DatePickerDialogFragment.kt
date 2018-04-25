@@ -2,79 +2,93 @@ package br.com.liveo.mvp.util.view
 
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.DialogFragment
-import android.app.FragmentManager
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.DatePicker
+import br.com.liveo.mvp.base.BaseDialog
+import br.com.liveo.mvp.util.DateUtil
 import java.util.*
 
-/**
- * Created by rudsonlima on 23/03/18.
- */
-class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+class DatePickerDialogFragment : BaseDialog(), DatePickerDialog.OnDateSetListener {
 
-    private var componentTag: String? = null
-    var onDateListener: OnDateListener? = null
-    var selectedDate: Date? = null
+    companion object {
 
-    var minimumDate: Date? = null
-    var maximumDate: Date? = null
+        private var listener: OnDateCallback? = null
+        private var disableFutureDate: Boolean = false
 
-    var openInYearPicker: Boolean = false
+        private var sCalendar: Calendar? = null
 
-    interface OnDateListener {
-        fun onDateListener(date: Date, tag: String)
+        val calendar: Calendar?
+            get() {
+                if (sCalendar == null) {
+                    sCalendar = Calendar.getInstance()
+                }
+
+                return sCalendar
+            }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val calendar = Calendar.getInstance()
 
-        selectedDate?.let {
-            calendar.timeInMillis = it.time
+        var year = 0
+        var month = 0
+        var day = 0
+
+        calendar?.let {
+            year = it.get(Calendar.YEAR)
+            month = it.get(Calendar.MONTH)
+            day = it.get(Calendar.DAY_OF_MONTH)
         }
 
-        val year = calendar.get(Calendar.YEAR)
-        val monthOfYear = calendar.get(Calendar.MONTH)
-        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = DatePickerDialog(activity, this,
+                year, month, day)
 
-        val datePickerDialog = DatePickerDialog(activity, this, year, monthOfYear, dayOfMonth)
-
-        val datePicker = datePickerDialog.datePicker
-
-        minimumDate?.let {
-            datePicker.minDate = it.time
-        }
-
-        maximumDate?.let {
-            datePicker.maxDate = it.time
-        }
-
-        if (openInYearPicker) {
-            openYearPicker(datePicker)
+        if (disableFutureDate) {
+            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
         }
 
         return datePickerDialog
     }
 
-    override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val calendar = Calendar.getInstance()
-        calendar.set(year, monthOfYear, dayOfMonth)
-
-        onDateListener?.onDateListener(calendar.time, componentTag.orEmpty())
-    }
-
-    fun disableFutureDate() {
-        if (this.dialog != null) {
-            (this.dialog as DatePickerDialog).datePicker.maxDate = System.currentTimeMillis()
+    override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
+        listener?.let {
+            sCalendar?.let {
+                sCalendar?.set(year, month, day)
+                listener?.onDate(DateUtil.formatDateToString(it.time))
+            }
         }
     }
 
-    override fun show(manager: FragmentManager, tag: String) {
-        super.show(manager, tag)
-        componentTag = tag
+    interface OnDateCallback {
+        fun onDate(dateFormatted: String)
     }
 
-    private fun openYearPicker(datePicker: DatePicker) {
-        datePicker.touchables?.get(0)?.performClick()
+    class Builder {
+        private var dateAsString: String? = null
+
+        fun date(date: String): Builder {
+            dateAsString = date
+            return this
+        }
+
+        fun callback(OnDateCallback: OnDateCallback): Builder {
+            listener = OnDateCallback
+            return this
+        }
+
+        fun disableFutureDate(): Builder {
+            disableFutureDate = true
+            return this
+        }
+
+        fun create(): DatePickerDialogFragment {
+            val fragment = DatePickerDialogFragment()
+
+            if (!TextUtils.isEmpty(dateAsString)) {
+                calendar?.time = DateUtil.date(dateAsString, DateUtil.DATE_FORMAT_LOCAL)
+            }
+
+            return fragment
+        }
     }
 }
