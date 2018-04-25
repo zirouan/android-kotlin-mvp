@@ -6,8 +6,8 @@ import br.com.liveo.mvp.data.local.Preferences
 import br.com.liveo.mvp.data.local.PreferencesHelper
 import br.com.liveo.mvp.data.local.endpoint.EndPointMocked
 import br.com.liveo.mvp.data.remote.ApiHelper
-import br.com.liveo.mvp.data.remote.EndPoint
-import br.com.liveo.mvp.data.remote.EndPointHelper
+import br.com.liveo.mvp.data.remote.endpoint.EndPoint
+import br.com.liveo.mvp.data.remote.endpoint.EndPointHelper
 import dagger.Module
 import dagger.Provides
 import java.lang.ref.WeakReference

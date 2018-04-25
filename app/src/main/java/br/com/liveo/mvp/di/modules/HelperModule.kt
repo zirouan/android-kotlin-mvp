@@ -6,8 +6,8 @@ import br.com.liveo.mvp.BuildConfig
 import br.com.liveo.mvp.data.local.Preferences
 import br.com.liveo.mvp.data.local.PreferencesHelper
 import br.com.liveo.mvp.data.remote.ApiHelper
-import br.com.liveo.mvp.data.remote.EndPoint
-import br.com.liveo.mvp.data.remote.EndPointHelper
+import br.com.liveo.mvp.data.remote.endpoint.EndPoint
+import br.com.liveo.mvp.data.remote.endpoint.EndPointHelper
 import br.com.liveo.mvp.data.remote.interceptor.RequestInterceptor
 import dagger.Module
 import dagger.Provides

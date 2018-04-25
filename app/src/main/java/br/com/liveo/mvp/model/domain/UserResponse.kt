@@ -19,5 +19,4 @@ class UserResponse(
         var totalPages: Int,
 
         @SerializedName("data")
-        var list: List<User>) {
-}
+        var list: List<User>)

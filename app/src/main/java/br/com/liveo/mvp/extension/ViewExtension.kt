@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 
 /**
  * Created by rudsonlima on 25/04/18.
@@ -25,6 +26,14 @@ fun Snackbar.action(actionLabelResourceId: Int, color: Int? = null, listener: (V
     setAction(actionLabel, listener)
     color?.let { setActionTextColor(it) }
 }
+
+fun Context.toastShort(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+fun Context.toastShort(resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+
+fun Context.toastLong(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
+fun Context.toastLong(resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_LONG).show()
 
 fun View.hideSoftKeyboard(context: Context) {
     val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager

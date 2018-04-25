@@ -1,8 +1,7 @@
 package br.com.liveo.mvp.screen.home
 
 import br.com.liveo.mvp.model.domain.UserResponse
-import br.com.liveo.mvp.util.scheduler.TestSchedulerProvider
-import io.reactivex.Observable
+import br.com.liveo.mvp.data.scheduler.TestSchedulerProvider
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.After

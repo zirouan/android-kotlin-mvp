@@ -8,9 +8,9 @@ import br.com.liveo.mvp.R
 import br.com.liveo.mvp.base.BaseActivity
 import br.com.liveo.mvp.databinding.ActivityHomeBinding
 import br.com.liveo.mvp.di.scope.ActivityScoped
+import br.com.liveo.mvp.extension.toastShort
 import br.com.liveo.mvp.model.domain.UserResponse
 import br.com.liveo.mvp.screen.home.di.HomeModule
-import br.com.liveo.mvp.util.toastShort
 import javax.inject.Inject
 
 /**

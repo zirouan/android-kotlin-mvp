@@ -1,13 +1,13 @@
 package br.com.liveo.mvp.screen.home.di
 
 import android.support.annotation.NonNull
-import br.com.liveo.mvp.data.remote.EndPointHelper
+import br.com.liveo.mvp.data.remote.endpoint.EndPointHelper
 import br.com.liveo.mvp.di.scope.ActivityScoped
 import br.com.liveo.mvp.screen.home.HomeContract
 import br.com.liveo.mvp.screen.home.HomeInteractor
 import br.com.liveo.mvp.screen.home.HomePresenter
-import br.com.liveo.mvp.util.scheduler.BaseScheduler
-import br.com.liveo.mvp.util.scheduler.SchedulerProvider
+import br.com.liveo.mvp.base.BaseScheduler
+import br.com.liveo.mvp.data.scheduler.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 

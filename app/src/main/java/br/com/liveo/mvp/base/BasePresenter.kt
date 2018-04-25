@@ -3,7 +3,6 @@ package br.com.liveo.mvp.base
 
 import br.com.liveo.mvp.main.MainPresenter
 import br.com.liveo.mvp.main.MainView
-import br.com.liveo.mvp.util.scheduler.BaseScheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

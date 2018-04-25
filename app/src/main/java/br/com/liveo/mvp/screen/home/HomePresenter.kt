@@ -1,7 +1,7 @@
 package br.com.liveo.mvp.screen.home
 
 import br.com.liveo.mvp.base.BasePresenter
-import br.com.liveo.mvp.util.scheduler.BaseScheduler
+import br.com.liveo.mvp.base.BaseScheduler
 import javax.inject.Inject
 
 /**
@@ -24,7 +24,9 @@ constructor(val mInteractor: HomeContract.Interactor, scheduler: BaseScheduler) 
                     .observeOn(this.scheduler.ui())
                     .subscribe({ response ->
                         it.onLoading(false)
-                        it.onUserResponse(response)
+
+                        if (response != null)
+                            it.onUserResponse(response) else it.onError(null)
                     }, { error ->
                         it.onLoading(false)
                         it.onError(error)

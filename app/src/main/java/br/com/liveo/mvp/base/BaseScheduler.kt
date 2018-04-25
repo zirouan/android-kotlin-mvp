@@ -1,4 +1,4 @@
-package br.com.liveo.mvp.util.scheduler
+package br.com.liveo.mvp.base
 
 import io.reactivex.Scheduler
 

@@ -1,9 +1,7 @@
 package br.com.liveo.mvp.screen.home
 
-import br.com.liveo.mvp.data.remote.EndPoint
-import br.com.liveo.mvp.data.remote.EndPointHelper
+import br.com.liveo.mvp.data.remote.endpoint.EndPointHelper
 import br.com.liveo.mvp.model.domain.UserResponse
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.junit.Before

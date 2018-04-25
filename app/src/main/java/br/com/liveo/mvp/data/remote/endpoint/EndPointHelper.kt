@@ -1,4 +1,4 @@
-package br.com.liveo.mvp.data.remote
+package br.com.liveo.mvp.data.remote.endpoint
 
 import br.com.liveo.mvp.model.domain.UserResponse
 import io.reactivex.Single

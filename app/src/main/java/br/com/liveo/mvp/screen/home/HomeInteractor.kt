@@ -1,6 +1,6 @@
 package br.com.liveo.mvp.screen.home
 
-import br.com.liveo.mvp.data.remote.EndPointHelper
+import br.com.liveo.mvp.data.remote.endpoint.EndPointHelper
 import br.com.liveo.mvp.model.domain.UserResponse
 import io.reactivex.Single
 import javax.inject.Inject

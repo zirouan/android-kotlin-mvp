@@ -87,7 +87,6 @@ abstract class BaseActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     fun showElevation(appBarLayout: AppBarLayout?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             appBarLayout?.elevation = 10f
