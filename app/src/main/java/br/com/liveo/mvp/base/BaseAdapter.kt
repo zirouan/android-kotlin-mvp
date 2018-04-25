@@ -15,32 +15,39 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     private val onItemClick = PublishSubject.create<T>()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder =
-            onCreateViewHolderBase(parent!!, viewType)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+            onCreateViewHolderBase(parent, viewType)
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        this.onBindViewHolderBase(holder!!, position)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        this.onBindViewHolderBase(holder, position)
 
-        holder.itemView.setOnClickListener { onItemClick.onNext(dataList!![holder.adapterPosition]) }
-    }
-
-    abstract fun onCreateViewHolderBase(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-
-    abstract fun onBindViewHolderBase(holder: RecyclerView.ViewHolder, position: Int)
-
-
-    override fun getItemViewType(position: Int): Int = super.getItemViewType(position)
-
-    override fun getItemCount(): Int =
-            if (dataList != null && dataList!!.size > 0) dataList!!.size else 0
-
-    fun getItem(index: Int): T {
-        return if (dataList != null && dataList!![index] != null) {
-            dataList!![index]
-        } else {
-            throw IllegalArgumentException("Item with index $index doesn't exist, dataSet is $dataList")
+        holder.itemView?.setOnClickListener {
+            val index = holder.adapterPosition
+            (dataList?.get(index))?.let {
+                onItemClick.onNext(it)
+            }
         }
     }
 
-    fun observableItemClick(): Observable<T> = onItemClick
+    abstract fun onCreateViewHolderBase(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder
+
+    abstract fun onBindViewHolderBase(holder: RecyclerView.ViewHolder?, position: Int)
+
+    override fun getItemCount(): Int {
+        dataList?.size?.let {
+            return it
+        }
+
+        return 0
+    }
+
+    fun getItem(index: Int): T {
+        dataList?.get(index)?.let {
+            return it
+        }
+
+        throw IllegalArgumentException("Item with index $index doesn't exist, dataSet is $dataList")
+    }
+
+    fun itemClick(): Observable<T> = onItemClick
 }

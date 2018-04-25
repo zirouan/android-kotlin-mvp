@@ -19,14 +19,17 @@ class HomeAdapter(userResponse: UserResponse) : BaseAdapter<User>() {
         this.dataList = userResponse.list
     }
 
-    override fun onCreateViewHolderBase(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            HomeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.activity_home_item, parent, false))
+    override fun onCreateViewHolderBase(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+        return HomeViewHolder(LayoutInflater.from(parent?.context).inflate(
+                R.layout.activity_home_item, parent, false))
+    }
 
-    override fun onBindViewHolderBase(holder: RecyclerView.ViewHolder, position: Int) {
-        val user = dataList!![position]
+    override fun onBindViewHolderBase(holder: RecyclerView.ViewHolder?, position: Int) {
+        val user = dataList?.get(position)
 
-        (holder as HomeViewHolder).binding.setVariable(BR.user, user)
-        holder.binding.executePendingBindings()
+        (holder as HomeViewHolder).binding?.setVariable(BR.user, user)
+        holder.binding?.executePendingBindings()
+
     }
 
     override fun getItemCount(): Int = super.getItemCount()

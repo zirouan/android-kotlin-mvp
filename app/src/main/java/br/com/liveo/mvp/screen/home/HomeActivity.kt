@@ -37,11 +37,12 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     private fun onInitView() {
         mBinding = this.bindView(R.layout.activity_home) as ActivityHomeBinding
 
-        this.onInitToolbar(mBinding!!.includeToolbar.toolbar, R.string.app_name)
-        mBinding!!.recyclerView.layoutManager = LinearLayoutManager(this)
+        this.onInitToolbar(mBinding?.includeToolbar?.toolbar, R.string.app_name)
 
-        mBinding!!.swipeContainer.setOnRefreshListener(onRefresh)
-        mBinding!!.swipeContainer.setColorSchemeResources(R.color.accent, R.color.accent,
+        mBinding?.recyclerView?.layoutManager = LinearLayoutManager(this)
+
+        mBinding?.swipeContainer?.setOnRefreshListener(onRefresh)
+        mBinding?.swipeContainer?.setColorSchemeResources(R.color.accent, R.color.accent,
                 R.color.accent, R.color.accent)
     }
 
@@ -59,7 +60,7 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     }
 
     override fun onLoading(isLoading: Boolean) {
-        mBinding!!.swipeContainer.isRefreshing = isLoading
+        mBinding?.swipeContainer?.isRefreshing = isLoading
     }
 
     override fun onError(error: Throwable?) {}
@@ -69,9 +70,9 @@ class HomeActivity : BaseActivity(), HomeContract.View {
 
     override fun onUserResponse(userResponse: UserResponse) {
         val adapter = HomeAdapter(userResponse)
-        adapter.observableItemClick().subscribe { user -> toastShort(user.name) }
+        adapter.itemClick().subscribe { user -> toastShort(user.name) }
 
-        mBinding!!.recyclerView.adapter = adapter
+        mBinding?.recyclerView?.adapter = adapter
     }
 
     override fun onDestroy() {

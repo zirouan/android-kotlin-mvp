@@ -1,7 +1,6 @@
 package br.com.liveo.mvp.screen.home
 
 import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import br.com.liveo.mvp.databinding.ActivityHomeItemBinding
@@ -11,13 +10,9 @@ import br.com.liveo.mvp.databinding.ActivityHomeItemBinding
  */
 
 class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val mBinding: ActivityHomeItemBinding
+    private val mBinding: ActivityHomeItemBinding? =
+            DataBindingUtil.bind(view)
 
-    init {
-
-        this.mBinding = DataBindingUtil.bind<ActivityHomeItemBinding>(view)
-    }
-
-    val binding: ViewDataBinding
+    val binding: ActivityHomeItemBinding?
         get() = mBinding
 }

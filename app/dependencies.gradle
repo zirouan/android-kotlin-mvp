@@ -1,0 +1,49 @@
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Test
+    testImplementation "junit:junit:${junit_version}"
+    testImplementation "org.mockito:mockito-core:${mockito_version}"
+
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+
+    //Google
+    implementation "com.android.support:design:${google_support_version}"
+    implementation "com.android.support:appcompat-v7:${google_support_version}"
+    implementation "com.android.support:recyclerview-v7:${google_support_version}"
+    implementation "com.android.support.constraint:constraint-layout:${google_constraint_version}"
+
+    kapt "com.android.databinding:compiler:${google_databinding_compiler_version}"
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Dagger 2
+    implementation "com.google.dagger:dagger:${dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+
+    //Square
+    implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${interceptor_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit_converter_gson_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit_adapter_rxjava_version}"
+
+    //rxjava
+    implementation "io.reactivex.rxjava2:rxjava:${rxjava_version}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxandroid_version}"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:${glide_version}"
+
+    //Others
+    implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${keyboard_event_version}"
+}

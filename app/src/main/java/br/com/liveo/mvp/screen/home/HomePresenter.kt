@@ -15,32 +15,26 @@ import javax.inject.Inject
  */
 
 class HomePresenter @Inject
-constructor(val mInteractor: HomeContract.Interactor, scheduler: BaseScheduler) : BasePresenter<HomeContract.View>(scheduler), HomeContract.Presenter {
+constructor(val mInteractor: HomeContract.Interactor, scheduler: BaseScheduler) :
+        BasePresenter<HomeContract.View>(scheduler), HomeContract.Presenter {
 
     var mView: HomeContract.View? = null
 
     override fun fetchUsers() {
-        this.mInteractor.fetchUsers(this.mView!!.page).subscribeOn(this.schedulerProvider.io())
-                .observeOn(this.schedulerProvider.ui())
-                .subscribe(object : Observer<UserResponse> {
-                    override fun onSubscribe(@io.reactivex.annotations.NonNull d: Disposable) {
-                        mView!!.onLoading(true)
-                    }
+        this.mView?.let {
+            it.onLoading(true)
 
-                    override fun onNext(@io.reactivex.annotations.NonNull response: UserResponse) {
-                        mView!!.onLoading(false)
-                        mView!!.onUserResponse(response)
+            this.mInteractor.fetchUsers(it.page).subscribeOn(this.schedulerProvider.io())
+                    .observeOn(this.schedulerProvider.ui())
+                    .doOnTerminate {
+                        it.onLoading(false)
                     }
-
-                    override fun onError(@io.reactivex.annotations.NonNull error: Throwable) {
-                        mView!!.onLoading(false)
-                        mView!!.onError(error)
-                    }
-
-                    override fun onComplete() {
-
-                    }
-                })
+                    .subscribe({ response ->
+                        it.onUserResponse(response)
+                    }, { error ->
+                        it.onError(error)
+                    })
+        }
     }
 
     override fun attach(view: HomeContract.View) {

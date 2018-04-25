@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.WindowManager
 import br.com.liveo.mvp.R
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 /**
  * Created by rudsonlima on 8/29/17.
@@ -27,66 +25,50 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun bindView(layout: Int): ViewDataBinding =
             DataBindingUtil.setContentView(this, layout)
 
-    fun onInitToolbar(toolBar: Toolbar) {
-        onInitToolbar(toolBar, getString(R.string.clear), -1, false)
+    //region Methods toolbar
+    fun onInitToolbar(toolBar: Toolbar?) {
+        onInitToolbar(toolBar, R.string.clear, -1, false)
     }
 
-    fun onInitToolbar(toolBar: Toolbar, title: String) {
+    fun onInitToolbar(toolBar: Toolbar?, title: Int) {
         onInitToolbar(toolBar, title, -1, false)
     }
 
-    fun onInitToolbar(toolBar: Toolbar, title: Int) {
-        onInitToolbar(toolBar, title, -1, false)
-    }
-
-    fun onInitToolbar(toolBar: Toolbar, title: Int, icon: Int) {
-        onInitToolbar(toolBar, getString(title), icon, true)
-    }
-
-    fun onInitToolbar(toolBar: Toolbar, title: String, displayHome: Boolean) {
+    fun onInitToolbar(toolBar: Toolbar?, title: Int, displayHome: Boolean) {
         onInitToolbar(toolBar, title, -1, displayHome)
     }
 
-    fun onInitToolbar(toolBar: Toolbar, title: Int, displayHome: Boolean) {
-        onInitToolbar(toolBar, title, -1, displayHome)
-    }
+    fun onInitToolbar(toolBar: Toolbar?, title: Int, icon: Int,
+                      displayHome: Boolean = true) {
 
-    fun onInitToolbar(toolBar: Toolbar, title: Int, icon: Int, displayHome: Boolean) {
-        onInitToolbar(toolBar, getString(title), icon, displayHome)
-    }
-
-    fun onInitToolbar(toolBar: Toolbar?, title: String, icon: Int, displayHome: Boolean) {
-
-        if (toolBar != null) {
+        toolBar?.let { toolbar ->
             setSupportActionBar(toolBar)
-            val actionBar = supportActionBar
 
-            if (actionBar != null) {
-                actionBar.title = title
+            supportActionBar?.let { actionBar ->
+                if (title != -1) {
+                    actionBar.title = getString(title)
+                }
+
                 actionBar.setDisplayShowHomeEnabled(displayHome)
                 actionBar.setDisplayHomeAsUpEnabled(displayHome)
-                if (icon != -1) {
-                    toolBar.setNavigationIcon(icon)
+                if (icon != -1 && displayHome) {
+                    toolbar.navigationIcon = ContextCompat.getDrawable(this, icon)
                 }
             }
         }
     }
+    //endregion
 
-    fun showElevation(appBarLayout: AppBarLayout) {
+    fun showElevation(appBarLayout: AppBarLayout?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.elevation = 10f
+            appBarLayout?.elevation = 10f
         }
     }
 
-    fun removeEvelation(appBarLayout: AppBarLayout) {
+    fun removeEvelation(appBarLayout: AppBarLayout?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.elevation = 0f
+            appBarLayout?.elevation = 0f
         }
-    }
-
-    fun onEventKeyboard(listener: KeyboardVisibilityEventListener?) {
-        KeyboardVisibilityEvent.setEventListener(this
-        ) { isOpen -> listener?.onVisibilityChanged(isOpen) }
     }
 
     fun setStatusBarColor(color: Int) {
