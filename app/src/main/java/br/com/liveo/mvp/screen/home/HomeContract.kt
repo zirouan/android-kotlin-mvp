@@ -21,7 +21,7 @@ interface HomeContract {
         fun fetchUsers()
     }
 
-    interface Interactor {
+    interface Repository {
         fun fetchUsers(page: Int): Single<UserResponse>
     }
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 /**
  * Created by rudsonlima on 9/4/17.
  */
-class HomeInteractor @Inject
-constructor(private val endPointHelper: EndPointHelper) : HomeContract.Interactor {
+class HomeRepository @Inject
+constructor(private val endPointHelper: EndPointHelper) : HomeContract.Repository {
     override fun fetchUsers(page: Int): Single<UserResponse> = endPointHelper.fetchUsers(page)
 }

@@ -21,6 +21,9 @@ abstract class BasePresenter<T : MainView>(protected val scheduler: BaseSchedule
 
     var mView: T? = null
 
+    override val view: T?
+        get() = this.mView
+
     override fun detachView() {
         this.clearDisposables()
         this.mView = null

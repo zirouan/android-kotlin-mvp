@@ -1,7 +1,7 @@
 package br.com.liveo.mvp.screen.home
 
-import br.com.liveo.mvp.model.domain.UserResponse
 import br.com.liveo.mvp.data.scheduler.TestSchedulerProvider
+import br.com.liveo.mvp.model.domain.UserResponse
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.After
@@ -34,7 +34,7 @@ class HomePresenterTest {
     lateinit var mUserResponse: UserResponse
 
     @Mock
-    lateinit var mInteractor: HomeContract.Interactor
+    lateinit var mRepository: HomeContract.Repository
 
     @Before
     fun setUp() {
@@ -43,11 +43,11 @@ class HomePresenterTest {
         this.mView?.let {
 
             _when(mView?.page).thenReturn(2)
-            _when(mInteractor.fetchUsers(2)).thenReturn(Single.just(mUserResponse))
+            _when(mRepository.fetchUsers(2)).thenReturn(Single.just(mUserResponse))
 
             mTestScheduler = TestScheduler()
-            mPresenter = HomePresenter(mInteractor, TestSchedulerProvider(mTestScheduler))
-            mPresenter.attach(it)
+            mPresenter = HomePresenter(mRepository, TestSchedulerProvider(mTestScheduler))
+            mPresenter.attachView(it)
         }
     }
 
@@ -59,7 +59,7 @@ class HomePresenterTest {
     @Test
     fun fetchUsers_sucess() {
         mPresenter.fetchUsers()
-        verify(mInteractor, times(1)).fetchUsers(2)
+        verify(mRepository, times(1)).fetchUsers(2)
     }
 
     @Test
@@ -92,7 +92,7 @@ class HomePresenterTest {
     fun fetchUsers_returningFailing_forView() {
         this.mView?.let {
             val throwable = Throwable()
-            _when(mInteractor.fetchUsers(2)).thenReturn(Single.error(throwable))
+            _when(mRepository.fetchUsers(2)).thenReturn(Single.error(throwable))
 
             mPresenter.fetchUsers()
 
@@ -106,14 +106,14 @@ class HomePresenterTest {
 
     @Test
     fun attach_isNotNull_sucess() {
-        Assert.assertNotNull(mPresenter.getView())
+        Assert.assertNotNull(mPresenter.view)
     }
 
     @Test
     fun detachView_isNull_sucess() {
-        Assert.assertNotNull(mPresenter.getView())
+        Assert.assertNotNull(mPresenter.view)
 
         mPresenter.detachView()
-        Assert.assertNull(mPresenter.getView())
+        Assert.assertNull(mPresenter.view)
     }
 }

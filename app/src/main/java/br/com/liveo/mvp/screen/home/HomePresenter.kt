@@ -12,14 +12,17 @@ import javax.inject.Inject
  */
 
 class HomePresenter @Inject
-constructor(val mInteractor: HomeContract.Interactor, scheduler: BaseScheduler) :
+constructor(val repository: HomeContract.Repository, scheduler: BaseScheduler) :
         BasePresenter<HomeContract.View>(scheduler), HomeContract.Presenter {
+
+    override val view: HomeContract.View?
+        get() = super.view
 
     override fun fetchUsers() {
         this.mView?.let {
             it.onLoading(true)
 
-            this.addDisposable(this.mInteractor.fetchUsers(it.page)
+            this.addDisposable(this.repository.fetchUsers(it.page)
                     .subscribeOn(this.scheduler.io())
                     .observeOn(this.scheduler.ui())
                     .subscribe({ response ->

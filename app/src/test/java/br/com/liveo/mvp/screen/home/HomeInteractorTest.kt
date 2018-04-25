@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations
 import org.mockito.Mockito.`when` as _when
 
 /**
- * This class makes tests for [HomeInteractor]
+ * This class makes tests for [HomeRepository]
  *
  * @author Rudson Lima
  * @since 09/24/17
@@ -29,21 +29,21 @@ class HomeInteractorTest {
     lateinit var mUserResponse: UserResponse
 
     @Mock
-    lateinit var mInteractor: HomeContract.Interactor
+    lateinit var mRepository: HomeContract.Repository
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
         mEndPointHelper?.let {
-            mInteractor = HomeInteractor(it)
-            _when(mInteractor.fetchUsers(PAGE)).thenReturn(Single.just(mUserResponse))
+            mRepository = HomeRepository(it)
+            _when(mRepository.fetchUsers(PAGE)).thenReturn(Single.just(mUserResponse))
         }
     }
 
     @Test
     fun fetchUsers_sucess() {
-        mInteractor.fetchUsers(2)
+        mRepository.fetchUsers(2)
         verify(mEndPointHelper)?.fetchUsers(2)
     }
 

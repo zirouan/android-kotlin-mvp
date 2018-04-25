@@ -31,6 +31,4 @@ class HomeAdapter(userResponse: UserResponse) : BaseAdapter<User>() {
         holder.binding?.executePendingBindings()
 
     }
-
-    override fun getItemCount(): Int = super.getItemCount()
 }
