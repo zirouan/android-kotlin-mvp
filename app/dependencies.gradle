@@ -17,6 +17,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     })
 
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:${uiautomator_v18_version}"
+
     //Google
     implementation "com.android.support:design:${google_support_version}"
     implementation "com.android.support:appcompat-v7:${google_support_version}"

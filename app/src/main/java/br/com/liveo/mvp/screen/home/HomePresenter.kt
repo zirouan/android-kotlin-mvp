@@ -26,12 +26,11 @@ constructor(val mInteractor: HomeContract.Interactor, scheduler: BaseScheduler) 
 
             this.mInteractor.fetchUsers(it.page).subscribeOn(this.schedulerProvider.io())
                     .observeOn(this.schedulerProvider.ui())
-                    .doOnTerminate {
-                        it.onLoading(false)
-                    }
                     .subscribe({ response ->
+                        it.onLoading(false)
                         it.onUserResponse(response)
                     }, { error ->
+                        it.onLoading(false)
                         it.onError(error)
                     })
         }

@@ -1,8 +1,10 @@
 package br.com.liveo.mvp.screen.home
 
-import br.com.liveo.mvp.data.remote.ApiEndPoint
+import br.com.liveo.mvp.data.remote.EndPoint
+import br.com.liveo.mvp.data.remote.EndPointHelper
 import br.com.liveo.mvp.model.domain.UserResponse
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
@@ -23,7 +25,7 @@ class HomeInteractorTest {
     val PAGE: Int = 2
 
     @Mock
-    var mApiEndPoint: ApiEndPoint? = null
+    var mEndPointHelper: EndPointHelper? = null
 
     @Mock
     lateinit var mUserResponse: UserResponse
@@ -35,22 +37,22 @@ class HomeInteractorTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        mApiEndPoint?.let {
+        mEndPointHelper?.let {
             mInteractor = HomeInteractor(it)
-            _when(mInteractor.fetchUsers(PAGE)).thenReturn(Observable.just(mUserResponse))
+            _when(mInteractor.fetchUsers(PAGE)).thenReturn(Single.just(mUserResponse))
         }
     }
 
     @Test
     fun fetchUsers_sucess() {
         mInteractor.fetchUsers(2)
-        verify(mApiEndPoint)?.fetchUsers(2)
+        verify(mEndPointHelper)?.fetchUsers(2)
     }
 
     @Test
     fun fetchUsers_noErros_sucess() {
         val subscriber = TestObserver.create<UserResponse>()
-        mApiEndPoint?.fetchUsers(2)?.subscribe(subscriber)
+        mEndPointHelper?.fetchUsers(2)?.subscribe(subscriber)
         subscriber.onNext(mUserResponse)
         subscriber.assertNoErrors()
         subscriber.assertComplete()

@@ -1,8 +1,6 @@
 package br.com.liveo.mvp.di.components
 
-import br.com.liveo.mvp.di.modules.NetworkModule
-import br.com.liveo.mvp.screen.home.di.HomeComponent
-import br.com.liveo.mvp.screen.home.di.HomeModule
+import br.com.liveo.mvp.di.modules.HelperModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,7 +9,5 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = arrayOf(NetworkModule::class))
-interface ApplicationComponent {
-    fun module(detailsModule: HomeModule): HomeComponent
-}
+@Component(modules = [(HelperModule::class)])
+interface ApplicationComponent : BaseApplicationComponent

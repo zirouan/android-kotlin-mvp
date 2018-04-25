@@ -11,7 +11,7 @@ import dagger.Subcomponent
  * @since 10/02/17
  */
 @ActivityScoped
-@Subcomponent(modules = arrayOf(HomeModule::class))
+@Subcomponent(modules = [(HomeModule::class)])
 interface HomeComponent {
     fun inject(homeActivity: HomeActivity)
 }

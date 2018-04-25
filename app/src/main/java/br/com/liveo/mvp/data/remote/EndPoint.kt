@@ -9,7 +9,7 @@ import retrofit2.http.Query
  * Created by rudsonlima on 8/29/17.
  */
 
-interface ApiEndPoint {
+interface EndPoint {
 
     @GET("api/users")
     fun fetchUsers(@Query("page") page: Int): Observable<UserResponse>
