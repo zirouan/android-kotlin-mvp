@@ -5,7 +5,6 @@ dependencies {
     testImplementation "junit:junit:${junit_version}"
     testImplementation "org.mockito:mockito-core:${mockito_version}"
 
-
     androidTestImplementation("com.android.support.test.espresso:espresso-core:${espresso_core_version}", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
