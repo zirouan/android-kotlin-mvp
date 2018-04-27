@@ -3,12 +3,14 @@ package br.com.liveo.mvp.screen.home
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import br.com.liveo.mvp.App
 import br.com.liveo.mvp.R
 import br.com.liveo.mvp.base.BaseActivity
 import br.com.liveo.mvp.databinding.ActivityHomeBinding
 import br.com.liveo.mvp.di.scope.ActivityScoped
 import br.com.liveo.mvp.extension.toastShort
+import br.com.liveo.mvp.model.User
 import br.com.liveo.mvp.model.domain.UserResponse
 import br.com.liveo.mvp.screen.home.di.HomeModule
 import javax.inject.Inject
@@ -55,7 +57,7 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     private val onRefresh = SwipeRefreshLayout.OnRefreshListener { fetchUsers() }
 
     private fun fetchUsers() {
-        this.mHomePresenter.attachView(this)
+        this.mHomePresenter.attach(this)
         this.mHomePresenter.fetchUsers()
     }
 
@@ -70,8 +72,9 @@ class HomeActivity : BaseActivity(), HomeContract.View {
 
     override fun onUserResponse(userResponse: UserResponse) {
         val adapter = HomeAdapter(userResponse)
-        adapter.itemClick().subscribe { user ->
-            toastShort(user.name)
+
+        adapter.onItemClick = { _, _, user ->
+            this.toastShort(user.name)
         }
 
         mBinding?.recyclerView?.adapter = adapter

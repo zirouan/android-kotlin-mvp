@@ -47,7 +47,7 @@ class HomePresenterTest {
 
             mTestScheduler = TestScheduler()
             mPresenter = HomePresenter(mRepository, TestSchedulerProvider(mTestScheduler))
-            mPresenter.attachView(it)
+            mPresenter.attach(it)
         }
     }
 

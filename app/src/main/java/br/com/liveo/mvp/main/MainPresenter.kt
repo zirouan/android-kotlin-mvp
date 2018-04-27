@@ -7,7 +7,7 @@ import br.com.liveo.mvp.screen.home.HomeContract
  */
 
 interface MainPresenter<T> {
-    fun attachView(view: T)
+    fun attach(view: T)
     fun detachView()
 
     val view: T?

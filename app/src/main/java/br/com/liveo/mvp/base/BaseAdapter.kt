@@ -1,9 +1,8 @@
 package br.com.liveo.mvp.base
 
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by rudsonlima on 9/16/17.
@@ -13,7 +12,7 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     protected var dataList: List<T>? = null
 
-    private val onItemClick = PublishSubject.create<T>()
+    var onItemClick: ((View, Int, T) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
             onCreateViewHolderBase(parent, viewType)
@@ -21,11 +20,9 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         this.onBindViewHolderBase(holder, position)
 
-        holder.itemView?.setOnClickListener {
-            val index = holder.adapterPosition
-            (dataList?.get(index))?.let {
-                onItemClick.onNext(it)
-            }
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(it, holder.adapterPosition,
+                    getItem(holder.adapterPosition))
         }
     }
 
@@ -48,6 +45,4 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
         throw IllegalArgumentException("Item with index $index doesn't exist, dataSet is $dataList")
     }
-
-    fun itemClick(): Observable<T> = onItemClick
 }

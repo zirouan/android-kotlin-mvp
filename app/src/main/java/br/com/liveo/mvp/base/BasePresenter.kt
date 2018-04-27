@@ -29,7 +29,7 @@ abstract class BasePresenter<T : MainView>(protected val scheduler: BaseSchedule
         this.mView = null
     }
 
-    override fun attachView(view: T) {
+    override fun attach(view: T) {
         this.mView = view
     }
 
