@@ -7,6 +7,6 @@ import br.com.liveo.mvp.main.MainView
  */
 
 interface BaseView<T> : MainView {
-    fun onLoading(isLoading: Boolean)
+    fun onLoading(loading: Boolean)
     fun onError(error: Throwable?)
 }

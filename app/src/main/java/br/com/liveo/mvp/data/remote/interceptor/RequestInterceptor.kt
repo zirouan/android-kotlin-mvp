@@ -20,8 +20,7 @@ constructor(private val preferencesHelper: PreferencesHelper) : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
 
-        val requestBuilder: Request.Builder
-        requestBuilder = chain.request().newBuilder()
+        val requestBuilder: Request.Builder = chain.request().newBuilder()
         requestBuilder.addHeader("Content-Type", "application/json")
 
         val token = preferencesHelper.token

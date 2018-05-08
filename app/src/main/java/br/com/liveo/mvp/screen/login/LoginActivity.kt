@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         super.onPostCreate(savedInstanceState)
     }
 
-    override fun onLoading(isLoading: Boolean) {
+    override fun onLoading(loading: Boolean) {
 
     }
 

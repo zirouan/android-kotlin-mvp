@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Created by malone on 15/02/18.
+ * Created by rudsonlima on 8/29/17.
  */
 object DateUtil {
     const val DATE_FORMAT_LOCAL = "dd/MM/yyyy"
