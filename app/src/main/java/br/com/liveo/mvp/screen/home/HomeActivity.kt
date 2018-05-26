@@ -43,7 +43,10 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     override fun onInitView() {
         mBinding = this.bindView(R.layout.activity_home) as ActivityHomeBinding
 
-        this.onInitToolbar(mBinding?.includeToolbar?.toolbar, R.string.app_name)
+        this.toolbar(mBinding?.includeToolbar?.toolbar).
+                icon(R.drawable.ic_arrow_back).
+                title(R.string.app_name).
+                builder()
 
         mBinding?.recyclerView?.layoutManager = LinearLayoutManager(this)
 

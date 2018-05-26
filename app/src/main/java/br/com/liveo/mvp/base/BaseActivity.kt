@@ -2,9 +2,7 @@ package br.com.liveo.mvp.base
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
-import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -18,6 +16,11 @@ import br.com.liveo.mvp.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
+    private var toolBarIcon: Int = -1
+    private var toolBar: Toolbar? = null
+    private var displayHome: Boolean = true
+    private var toolBarTitle: Int = R.string.clear
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -27,60 +30,48 @@ abstract class BaseActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, layout)
 
     //region Methods toolbar/appBar
-    fun onInitToolbar(toolBar: Toolbar?) {
-        onInitToolbar(toolBar, R.string.clear, -1, false)
+    fun toolbar(toolBar: Toolbar?): BaseActivity {
+        this.toolBar = toolBar
+        return this
     }
 
-    fun onInitToolbar(toolBar: Toolbar?, title: Int) {
-        onInitToolbar(toolBar, title, -1, false)
+    fun title(title: Int): BaseActivity {
+        this.toolBarTitle = title
+        return this
     }
 
-    fun onInitToolbar(toolBar: Toolbar?, title: Int, displayHome: Boolean) {
-        onInitToolbar(toolBar, title, -1, displayHome)
+    fun icon(icon: Int): BaseActivity {
+        this.toolBarIcon = icon
+        return this
     }
 
-    fun onInitToolbar(toolBar: Toolbar?, title: Int, icon: Int,
-                      displayHome: Boolean = true) {
+    fun displayHome(displayHome: Boolean): BaseActivity {
+        this.displayHome = displayHome
+        return this
+    }
 
+    fun builder(){
         toolBar?.let { toolbar ->
             setSupportActionBar(toolBar)
 
             supportActionBar?.let { actionBar ->
-                if (title != -1) {
-                    actionBar.title = getString(title)
+                if (toolBarTitle != -1) {
+                    actionBar.title = getString(toolBarTitle)
                 }
 
                 actionBar.setDisplayShowHomeEnabled(displayHome)
                 actionBar.setDisplayHomeAsUpEnabled(displayHome)
-                if (icon != -1 && displayHome) {
-                    toolbar.navigationIcon = ContextCompat.getDrawable(this, icon)
+                if (toolBarIcon != -1 && displayHome) {
+                    toolbar.navigationIcon = ContextCompat.getDrawable(this, toolBarIcon)
                 }
             }
         }
     }
-
-    fun showElevation(appBarLayout: AppBarLayout?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout?.elevation = 10f
-        }
-    }
-
-    fun removeEvelation(appBarLayout: AppBarLayout?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout?.elevation = 0f
-        }
-    }
-
-    fun setStatusBarColor(color: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = ContextCompat.getColor(this, color)
-        }
-    }
-
     //endregion
 
     //region Methods Abstract
     abstract fun onInitView()
+
     abstract fun onInitInject()
     abstract fun finishActivity()
     //endregion
