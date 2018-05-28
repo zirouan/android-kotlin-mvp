@@ -1,4 +1,4 @@
-package br.com.liveo.mvp.screen
+package br.com.liveo.mvp.base
 
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom

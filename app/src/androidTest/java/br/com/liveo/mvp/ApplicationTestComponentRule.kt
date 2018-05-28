@@ -1,4 +1,4 @@
-package br.com.liveo.mvp.screen
+package br.com.liveo.mvp
 
 import br.com.liveo.mvp.App
 import br.com.liveo.mvp.di.components.DaggerApplicationTestComponent

@@ -18,7 +18,7 @@ import org.mockito.Mockito.`when` as _when
  * @since 09/24/17
  */
 
-class HomeInteractorTest {
+class HomeRepositoryTest {
 
     val PAGE: Int = 2
 

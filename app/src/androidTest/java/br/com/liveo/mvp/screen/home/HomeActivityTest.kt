@@ -10,7 +10,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import br.com.liveo.mvp.R
-import br.com.liveo.mvp.screen.BaseActivityTestRule
+import br.com.liveo.mvp.base.BaseActivityTestRule
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
 import org.junit.Rule

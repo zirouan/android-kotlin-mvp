@@ -1,4 +1,4 @@
-package br.com.liveo.mvp.screen
+package br.com.liveo.mvp.base
 
 import android.content.Context
 import android.content.Intent
@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageButton
+import br.com.liveo.mvp.ApplicationTestComponentRule
 import br.com.liveo.mvp.R
 import br.com.liveo.mvp.di.modules.HelperTestModule
 import org.hamcrest.Matcher
